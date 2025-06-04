@@ -17,6 +17,54 @@
       "login": "222",
       "email": "fddsfsdf@gdfdf.clom",
       "password": "$2b$10$tEwGBqdqyCI9dq4SeTczKeEdhv94lKYrKhbRCD1iFSIxUMK2LQKe6"
+    },
+    {
+      "id": 4,
+      "login": "dsfsdf",
+      "email": "fdfsdfdd@ffdgfd.com",
+      "password": "$2b$10$/sHN0EIomumYqS/F8n2ceeSR6qRn7WfZxhu5XXP1ydpKpXUyjwYI6"
+    },
+    {
+      "id": 5,
+      "login": "sdfsdfsd",
+      "email": "dsfsdfsd@dfdfdg.com",
+      "password": "$2b$10$HdV9I0A/ao6A92vU4nsa6e0wm.nFklbxKsAY5XMj5Lq.YIwQJKhvW"
+    },
+    {
+      "id": 6,
+      "login": "dsfsdfsd",
+      "email": "fdfsdfdsdfsd@ffdgfd.com",
+      "password": "$2b$10$W1FioZQ5yY3LN0bHgEKIouVNdvKVjsuiQr2uE1y52HiCvlmfn9Yc."
+    },
+    {
+      "id": 7,
+      "login": "sdfsdfsdsdfsd",
+      "email": "fdfsdfadasd@ffdgfd.com",
+      "password": "$2b$10$uc9.cD0pyKBe/idE/s/4ze4VnTE5UjP6jPpH/HtH2SIfy9JDpOeTe"
+    },
+    {
+      "id": 8,
+      "login": "sd24343fsdg",
+      "email": "dsffsdfsdfdsfds@sffdgd.com",
+      "password": "$2b$10$xUl/yq6Wz/9bRQarkyiyBOssDO5zKOFHXwbXamiXjUlhxUIFTQBra"
+    },
+    {
+      "id": 9,
+      "login": "dsfsdfsdsdfsdfsd",
+      "email": "sddfdsfd@dsfsd.com",
+      "password": "$2b$10$DtpoGHi7BvlwWEAvGVPeC.A6xCMvyYfYMk0d9Do/l0cFuw.Ss4RCW"
+    },
+    {
+      "id": 10,
+      "login": "dfsdfsd",
+      "email": "sdffsfsf@dsfds.com",
+      "password": "$2b$10$3uB/ie/9eJbyCFvv.5kkWefCh.0z7gtIbIWIaclYky9hA48qCUc/a"
+    },
+    {
+      "id": 11,
+      "login": "asddsfsde223",
+      "email": "32svcsddf@dfsfgs.com",
+      "password": "$2b$10$2qDkVJnShT8AQXZMplLvbOjrKuOMME/3kGWYwndnXoiwVculqt8sa"
     }
   ]
 }

@@ -153,6 +153,114 @@
           "details": "Сотрудник службы безопасности"
         }
       ]
+    },
+    {
+      "type": "Авария",
+      "date": "0122-12-22",
+      "location": "xdfsdfs",
+      "status": "В обработке",
+      "description": "dsfsd",
+      "involvedPersons": [],
+      "regNumber": "INC-006"
+    },
+    {
+      "type": "Авария",
+      "date": "0122-12-22",
+      "location": "xdfsdfs",
+      "status": "В обработке",
+      "description": "dsfsd",
+      "involvedPersons": [],
+      "regNumber": "INC-007"
+    },
+    {
+      "type": "Кража",
+      "date": "2025-06-05",
+      "location": "vsdfsdf",
+      "status": "Удовлетворено",
+      "description": "fddsfs",
+      "involvedPersons": [],
+      "regNumber": "INC-008"
+    },
+    {
+      "type": "Пожар",
+      "date": "2025-05-05",
+      "location": "fdsfsf",
+      "status": "В обработке",
+      "description": "dfsdfds",
+      "involvedPersons": [],
+      "regNumber": "INC-009"
+    },
+    {
+      "type": "Пожар",
+      "date": "2025-06-05",
+      "location": "выаываы",
+      "status": "В обработке",
+      "description": "выаываыв",
+      "involvedPersons": [],
+      "regNumber": "INC-010"
+    },
+    {
+      "type": "Авария",
+      "date": "2025-06-05",
+      "location": "выаапва",
+      "status": "Удовлетворено",
+      "description": "выавыа",
+      "involvedPersons": [],
+      "regNumber": "INC-011"
+    },
+    {
+      "type": "Пожар",
+      "date": "2025-06-05",
+      "location": "цкц",
+      "status": "Отказано",
+      "description": "выываыв",
+      "involvedPersons": [],
+      "regNumber": "INC-012"
+    },
+    {
+      "type": "ДТП",
+      "date": "2025-06-05",
+      "location": "ваываыв",
+      "status": "В обработке",
+      "description": "авпвапв",
+      "involvedPersons": [],
+      "regNumber": "INC-013"
+    },
+    {
+      "type": "Авария",
+      "date": "2222-02-23",
+      "location": "выываыв",
+      "status": "Удовлетворено",
+      "description": "ыаываыв",
+      "involvedPersons": [],
+      "regNumber": "INC-014"
+    },
+    {
+      "type": "Пожар",
+      "date": "2025-06-04",
+      "location": "sdfsdfs",
+      "status": "Отказано",
+      "description": "sdfsdf",
+      "involvedPersons": [],
+      "regNumber": "INC-015"
+    },
+    {
+      "type": "Порча имущества",
+      "date": "2025-06-05",
+      "location": "xxx",
+      "status": "В обработке",
+      "description": "xxx",
+      "involvedPersons": [],
+      "regNumber": "INC-016"
+    },
+    {
+      "type": "ДТП",
+      "date": "1321-02-12",
+      "location": "13dsafsd",
+      "status": "Удовлетворено",
+      "description": "sdfsdfds",
+      "involvedPersons": [],
+      "regNumber": "INC-017"
     }
   ]
 }
