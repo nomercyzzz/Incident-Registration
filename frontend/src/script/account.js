@@ -4,78 +4,99 @@ createApp({
     data() {
         return {
             activeTab: 'login',
-            loginForm: {
-                username: '',
-                password: ''
-            },
-            registerForm: {
-                username: '',
-                email: '',
-                password: ''
-            },
-            error: ''
+                loginForm: { username: '', password: '' },
+            registerForm: { username: '', email: '', password: '' },
+            alert: {
+                show: false,
+                type: 'success',
+                title: '',
+                message: '',
+                btnText: 'OK'
+            }
         };
     },
     methods: {
-        async login() {
-            this.error = '';
+        showAlert(type, title, message, btnText = 'OK') {
+            this.alert = {
+                show: true,
+                type,
+                title,
+                message,
+                btnText
+            };
+            // Для успешного входа/регистрации
+            if (type === 'success') {
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 5000);
+            } else {
+                // Для ошибок - 3 секунды
+                setTimeout(() => {
+                    if (this.alert.show) {
+                        this.alert.show = false;
+                    }
+                }, 6000);
+            }
+        },
+        async submitLogin() {
             const res = await fetch('/api/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    login: this.loginForm.username,
-                    password: this.loginForm.password
+                body: JSON.stringify({ 
+                    login: this.loginForm.username, 
+                    password: this.loginForm.password 
                 })
             });
+
+            const data = await res.json();
             if (res.ok) {
-                const data = await res.json();
-                localStorage.setItem('token', data.token);
-                window.location.href = 'index.html';
+                localStorage.setItem('token', data.token);                this.showAlert('success', 'Успешно!', 'Вход выполнен успешно');
             } else {
-                this.error = 'Неверный логин или пароль';
+                this.showAlert('error', 'Ошибка!', data.message || 'Ошибка входа');
             }
         },
-        async register() {
-            this.error = '';
+        async submitRegister() {
             const res = await fetch('/api/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
+                body: JSON.stringify({ 
                     login: this.registerForm.username,
                     email: this.registerForm.email,
-                    password: this.registerForm.password
+                    password: this.registerForm.password 
                 })
             });
+
+            const data = await res.json();
             if (res.ok) {
-                const data = await res.json();
-                localStorage.setItem('token', data.token);
-                window.location.href = 'index.html';
+                localStorage.setItem('token', data.token);                this.showAlert('success', 'Успешно!', 'Регистрация успешна');
             } else {
-                this.error = 'Ошибка регистрации (логин или email уже занят)';
+                this.showAlert('error', 'Ошибка!', data.message || 'Ошибка регистрации');
             }
+        },        closeAlert() {
+            this.alert.show = false;
         }
     },
     mounted() {
-        // Если пользователь уже авторизован, сразу на главную
         if (localStorage.getItem('token')) {
             window.location.href = 'index.html';
         }
-        // Навесить обработчики на формы
-        setTimeout(() => {
-            const loginForm = document.querySelector('.form-wrapper.active .auth-form');
-            if (loginForm) {
-                loginForm.onsubmit = (e) => {
-                    e.preventDefault();
-                    this.login();
-                };
-            }
-            const registerForm = document.querySelectorAll('.form-wrapper')[1]?.querySelector('.auth-form');
-            if (registerForm) {
-                registerForm.onsubmit = (e) => {
-                    e.preventDefault();
-                    this.register();
-                };
-            }
-        }, 0);
+
+        const forms = {
+            login: document.querySelector('.form-wrapper.active .auth-form'),
+            register: document.querySelectorAll('.form-wrapper')[1]?.querySelector('.auth-form')
+        };
+
+        if (forms.login) {
+            forms.login.onsubmit = e => {
+                e.preventDefault();
+                this.submitLogin();
+            };
+        }
+        if (forms.register) {
+            forms.register.onsubmit = e => {
+                e.preventDefault();
+                this.submitRegister();
+            };
+        }
     }
 }).mount('#app');

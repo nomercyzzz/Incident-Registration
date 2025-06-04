@@ -264,17 +264,170 @@ body {
     background-color: var(--primary-dark);
 }
 
-/* Анимации */
-@keyframes drawShield {
+/* Стили для алерта */
+.alert-wrapper {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(15, 23, 42, 0.4);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+}
+
+.alert-container {
+    background: rgba(30, 41, 59, 0.8);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 2rem;
+    width: 90%;
+    max-width: 340px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+        0 0 0 1px rgba(255, 255, 255, 0.1),
+        0 10px 35px -5px rgba(0, 0, 0, 0.3);
+    transform-origin: center;
+}
+
+.alert-container.success {
+    border-top: 4px solid var(--primary);
+}
+
+.alert-container.error {
+    border-top: 4px solid var(--error);
+}
+
+.alert-icon {
+    width: 56px;
+    height: 56px;
+    position: relative;
+}
+
+.alert-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.alert-container.success .alert-icon {
+    color: var(--primary);
+}
+
+.alert-container.error .alert-icon {
+    color: var(--error);
+}
+
+.alert-content {
+    text-align: center;
+}
+
+.alert-title {
+    color: var(--text);
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.alert-message {
+    color: var(--text-muted);
+    font-size: 0.9375rem;
+}
+
+.alert-btn {
+    background: var(--primary);
+    color: var(--bg);
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 12px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 0.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.alert-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(45, 212, 191, 0.15);
+}
+
+.alert-btn:active {
+    transform: translateY(1px);
+}
+
+/* Продвинутые анимации */
+.alert-enter-active {
+    animation: alertEnter 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.alert-leave-active {
+    animation: alertLeave 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes alertEnter {
+    0% {
+        opacity: 0;
+        transform: scale(0.8) translateY(-20px);
+    }
+    70% {
+        transform: scale(1.05) translateY(5px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes alertLeave {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.95) translateY(-10px);
+    }
+}
+
+/* Анимации иконок */
+.circle {
+    stroke-dasharray: 70;
+    stroke-dashoffset: 70;
+    animation: drawCircle 0.6s ease forwards;
+}
+
+.check {
+    stroke-dasharray: 30;
+    stroke-dashoffset: 30;
+    animation: drawCheck 0.4s ease forwards 0.4s;
+}
+
+.cross {
+    stroke-dasharray: 20;
+    stroke-dashoffset: 20;
+    animation: drawCross 0.4s ease forwards 0.4s;
+}
+
+@keyframes drawCircle {
     to {
         stroke-dashoffset: 0;
     }
 }
 
-@keyframes drawCheckmark {
-    from {
-        stroke-dashoffset: 100;
+@keyframes drawCheck {
+    to {
+        stroke-dashoffset: 0;
     }
+}
+
+@keyframes drawCross {
     to {
         stroke-dashoffset: 0;
     }

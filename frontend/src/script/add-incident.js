@@ -1,95 +1,103 @@
-import { createApp, ref, onMounted } from 'vue';
+const { createApp } = Vue;
 
 createApp({
-    setup() {
-        const form = ref({
-            type: '',
-            date: '',
-            location: '',
-            status: '',
-            description: '',
-            involvedPersons: []
-        });
-        const incidentTypes = ref([]);
-        const statuses = ref([]);
-        const personRoles = ref([]);
-
-        // Получение форм с бэкенда
-        const fetchForms = async () => {
-            const res = await fetch('/api/forms');
-            const data = await res.json();
-            incidentTypes.value = data.incidentTypes;
-            statuses.value = data.statuses;
-            personRoles.value = data.personRoles;
-        };        onMounted(async () => {
-            const token = localStorage.getItem('token');
-            if (!token) {
-                window.location.href = 'account.html';
-                return;
+    data() {
+        return {
+            form: {
+                type: '',
+                date: '',
+                location: '',
+                status: '',
+                description: '',
+                involvedPersons: []
+            },
+            incidentTypes: [],
+            statuses: [],
+            personRoles: [],
+            alert: {
+                show: false,
+                type: 'success',
+                title: '',
+                message: '',
+                btnText: 'OK'
             }
+        };
+    },
+    methods: {
+        goBack() {
+            window.location.href = 'index.html';
+        },
+        
+        showAlert(type, title, message, btnText = 'OK') {
+            this.alert = {
+                show: true,
+                type,
+                title,
+                message,
+                btnText
+            };
 
-            try {
-                // Проверяем валидность токена
-                const payload = JSON.parse(atob(token.split('.')[1]));
-                const expiry = payload.exp * 1000; // конвертируем в миллисекунды
-                if (Date.now() >= expiry) {
-                    localStorage.removeItem('token');
-                    window.location.href = 'account.html';
-                    return;
+            // Автоматически скрываем алерт через 5 секунд
+            setTimeout(() => {
+                if (this.alert.show) {
+                    this.alert.show = false;
                 }
-            } catch (e) {
-                localStorage.removeItem('token');
-                window.location.href = 'account.html';
-                return;
-            }
+            }, 5000);
+        },
 
-            await fetchForms();
-        });
+        // Методы для работы с формой
+        async fetchForms() {
+                const res = await fetch('/api/forms');
+                const data = await res.json();
+                this.incidentTypes = data.incidentTypes || [];
+                this.statuses = data.statuses || [];
+                this.personRoles = data.personRoles || [];
+        },
 
-        // Добавление причастного лица
-        const addPerson = () => {
-            form.value.involvedPersons.push({
+        addPerson() {
+            this.form.involvedPersons.push({
                 fullName: '',
                 role: '',
                 address: '',
                 criminalRecord: 0,
                 details: ''
             });
-        };
-        // Удаление причастного лица
-        const removePerson = (index) => {
-            form.value.involvedPersons.splice(index, 1);
-        };
-        // Отправка формы на сервер
-        const submitForm = async () => {
-            const token = localStorage.getItem('token');
-            const res = await fetch('/api/incidents', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + token
-                },
-                body: JSON.stringify(form.value)
-            });
-            if (res.ok) {
-                window.location.href = 'index.html';
-            } else {
-                alert('Ошибка: требуется авторизация!');
-            }
-        };
-        // Возврат на главную страницу
-        const goBack = () => {
-            window.location.href = 'index.html';
-        };
-        return {
-            form,
-            incidentTypes,
-            statuses,
-            personRoles,
-            addPerson,
-            removePerson,
-            submitForm,
-            goBack
-        };
+        },
+
+        removePerson(index) {
+            this.form.involvedPersons.splice(index, 1);
+        },
+
+        async submitForm() {
+                const token = localStorage.getItem('token');
+                if (!token) {
+                    window.location.href = 'account.html';
+                    return;
+                }
+
+                const res = await fetch('/api/incidents', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify(this.form)
+                });
+
+                if (res.ok) {
+                    this.showAlert('success', 'Успешно!', 'Инцидент успешно зарегистрирован');
+                    setTimeout(() => window.location.href = 'index.html', 5000);
+                } else {
+                    const data = await res.json();
+                    this.showAlert('error', 'Ошибка!', data.message || 'Ошибка при добавлении происшествия');
+                }
+        }
+    },
+    async mounted() {
+        if (!localStorage.getItem('token')) {
+            window.location.href = 'account.html';
+            return;
+        }
+        await this.fetchForms();
     }
 }).mount('#app');

@@ -240,3 +240,208 @@ body {
     30%, 50%, 70% { transform: translateX(-2px); }
     40%, 60% { transform: translateX(2px); }
 }
+
+/* Модальный алерт */
+.alert-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15,23,42,0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+.alert-modal-window {
+    background: var(--surface, #fff);
+    border-radius: 1.25rem;
+    box-shadow: 0 8px 32px 0 rgba(31,41,55,0.25);
+    padding: 2.5rem 2rem 2rem 2rem;
+    min-width: 320px;
+    max-width: 90vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: alert-bounce-in 0.5s cubic-bezier(.68,-0.55,.27,1.55);
+}
+.alert-modal-window.success {
+    border-top: 6px solid #22c55e;
+}
+.alert-modal-window.error {
+    border-top: 6px solid #ef4444;
+}
+.alert-modal-icon {
+    margin-bottom: 1rem;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.alert-modal-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text, #1e293b);
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+.alert-modal-message {
+    color: var(--text, #334155);
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+.alert-modal-btn {
+    background: linear-gradient(90deg,#3b82f6 0%,#6366f1 100%);
+    color: #fff;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.5rem 2.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    box-shadow: 0 2px 8px 0 rgba(59,130,246,0.10);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.alert-modal-btn:hover {
+    background: linear-gradient(90deg,#2563eb 0%,#7c3aed 100%);
+}
+@keyframes alert-bounce-in {
+    0% { opacity: 0; transform: scale(0.7) translateY(-40px); }
+    60% { opacity: 1; transform: scale(1.05) translateY(10px); }
+    80% { transform: scale(0.97) translateY(-4px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+.alert-fade-enter-active, .alert-fade-leave-active {
+    transition: opacity 0.3s;
+}
+.alert-fade-enter-from, .alert-fade-leave-to {
+    opacity: 0;
+}
+
+/* Алерт в стиле сайта */
+.alert-wrapper {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(15, 23, 42, 0.4);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+}
+
+.alert-container {
+    background: rgba(30, 41, 59, 0.8);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 2rem;
+    width: 90%;
+    max-width: 340px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+        0 0 0 1px rgba(255, 255, 255, 0.1),
+        0 10px 35px -5px rgba(0, 0, 0, 0.3);
+    transform-origin: center;
+}
+
+.alert-container.success {
+    border-top: 4px solid var(--primary);
+}
+
+.alert-container.error {
+    border-top: 4px solid var(--error);
+}
+
+.alert-icon {
+    width: 56px;
+    height: 56px;
+    position: relative;
+    color: var(--primary);
+}
+
+.alert-container.success .alert-icon {
+    color: var(--primary);
+}
+
+.alert-container.error .alert-icon {
+    color: var(--error);
+}
+
+.alert-content {
+    text-align: center;
+}
+
+.alert-title {
+    color: var(--text);
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.alert-message {
+    color: var(--text-muted);
+    font-size: 0.9375rem;
+}
+
+.alert-btn {
+    background: var(--primary);
+    color: var(--bg);
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 12px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 0.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.alert-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(45, 212, 191, 0.15);
+}
+
+.alert-btn:active {
+    transform: translateY(1px);
+}
+
+/* Продвинутые анимации */
+.alert-enter-active {
+    animation: alertEnter 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.alert-leave-active {
+    animation: alertLeave 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes alertEnter {
+    0% {
+        opacity: 0;
+        transform: scale(0.8) translateY(-20px);
+    }
+    70% {
+        transform: scale(1.05) translateY(5px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes alertLeave {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.8) translateY(-20px);
+    }
+}
