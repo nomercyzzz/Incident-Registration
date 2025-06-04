@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Авторизация</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="../styles/account.css">
+</head>
+<body class="antialiased">
+    <div class="page-wrapper">
+        <div id="app" class="auth-container">
+            <div class="auth-card">
+                <div class="logo-container">
+                    <div class="logo-wrapper">
+                        <svg class="shield-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path class="shield-path" d="M12 22C12 22 20 18 20 12V5L12 2L4 5V12C4 18 12 22 12 22Z" stroke="currentColor" stroke-width="1.5"/>
+                            <path class="checkmark-path" d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="tab-switcher">
+                    <button 
+                        @click="activeTab = 'login'"
+                        :class="['tab-btn', activeTab === 'login' ? 'active' : '']"
+                    >
+                        Вход
+                    </button>
+                    <button 
+                        @click="activeTab = 'register'"
+                        :class="['tab-btn', activeTab === 'register' ? 'active' : '']"
+                    >
+                        Регистрация
+                    </button>
+                </div>
+                <div :class="['form-wrapper', activeTab === 'login' ? 'active' : '']">
+                    <form @submit.prevent class="auth-form">
+                        <div class="form-field">
+                            <input 
+                                type="text"
+                                v-model="loginForm.username"
+                                placeholder="Логин"
+                                required
+                            >
+                        </div>
+                        
+                        <div class="form-field">
+                            <input 
+                                type="password"
+                                v-model="loginForm.password"
+                                placeholder="Пароль"
+                                required
+                            >
+                        </div>
+                        
+                        <button 
+                            type="submit"
+                            class="submit-btn"
+                        >
+                            <span>Войти</span>
+                        </button>
+                    </form>
+                </div>
+                <div :class="['form-wrapper', activeTab === 'register' ? 'active' : '']">
+                    <form @submit.prevent class="auth-form">
+                        <div class="form-field">
+                            <input 
+                                type="text"
+                                v-model="registerForm.username"
+                                placeholder="Логин"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-field">
+                            <input 
+                                type="email"
+                                v-model="registerForm.email"
+                                placeholder="Email"
+                                required
+                            >
+                        </div>
+                        
+                        <div class="form-field">
+                            <input 
+                                type="password"
+                                v-model="registerForm.password"
+                                placeholder="Пароль"
+                                required
+                            >
+                        </div>
+                        
+                        <button 
+                            type="submit"
+                            class="submit-btn"
+                        >
+                            <span>Создать аккаунт</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../script/account.js"></script>
+</body>
+</html>
