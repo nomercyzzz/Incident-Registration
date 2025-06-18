@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ-панель</title>
+    <link rel="stylesheet" href="../styles/admin-panel.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="../script/admin-panel.js" defer></script>
+</head>
+<body>
+    <div id="app">
+        <h1>Админ-панель</h1>
+        <div class="admin-header-actions">
+            <button class="logout-btn" @click="logout">Выйти в главное меню</button>
+        </div>
+        <section>
+            <h2>Пользователи</h2>
+            <div class="admin-panel-actions">
+                <input v-model="userSearch" placeholder="Поиск пользователя..." class="search-input">
+                <button @click="showAddUser = true">Добавить пользователя</button>
+            </div>
+            <table>
+                <thead>
+                    <tr><th>ID</th><th>Логин</th><th>Email</th><th>Действия</th></tr>
+                </thead>
+                <tbody>
+                    <tr v-for="user in filteredUsers" :key="user.id">
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.login }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>
+                            <button @click="editUser(user)">Редактировать</button>
+                            <button @click="deleteUser(user.id)">Удалить</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div v-if="userLoadError" style="color: #c00; margin: 10px 0; font-size:1.05em;">
+                {{ userLoadError }}
+            </div>
+        </section>
+        <section>
+            <h2>Инциденты</h2>
+            <div class="admin-panel-actions">
+                <input v-model="incidentSearch" placeholder="Поиск инцидента..." class="search-input">
+                <button @click="showAddIncident = true">Добавить инцидент</button>
+            </div>
+            <table>
+                <thead>
+                    <tr><th>ID</th><th>Тип</th><th>Описание</th><th>Действия</th></tr>
+                </thead>
+                <tbody>
+                    <tr v-for="incident in filteredIncidents" :key="incident.regNumber">
+                        <td>{{ incident.regNumber }}</td>
+                        <td>{{ incident.type }}</td>
+                        <td>{{ incident.description }}</td>
+                        <td>
+                            <button @click="editIncident(incident)">Редактировать</button>
+                            <button @click="deleteIncident(incident.regNumber)">Удалить</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <!-- Модальные окна для добавления -->
+        <div v-if="showAddUser" class="modal-overlay">
+            <div class="modal">
+                <h3>Добавить пользователя</h3>
+                <form @submit.prevent="addUser">
+                    <label>Логин:<input v-model="newUser.login" required></label>
+                    <label>Email:<input v-model="newUser.email" required></label>
+                    <label>Пароль:<input v-model="newUser.password" type="password" required></label>
+                    <div class="modal-actions">
+                        <button type="button" @click="showAddUser=false">Отмена</button>
+                        <button type="submit">Добавить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div v-if="showAddIncident" class="modal-overlay">
+            <div class="modal">
+                <h3>Добавить инцидент</h3>
+                <form @submit.prevent="addIncident">
+                    <label>Тип:<input v-model="newIncident.type" required></label>
+                    <label>Описание:<input v-model="newIncident.description" required></label>
+                    <div class="modal-actions">
+                        <button type="button" @click="showAddIncident=false">Отмена</button>
+                        <button type="submit">Добавить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div v-if="showEditUser" class="modal-overlay">
+            <div class="modal">
+                <h3>Редактировать пользователя</h3>
+                <form @submit.prevent="saveUser">
+                    <label>Логин:<input v-model="editUserData.login" required></label>
+                    <label>Email:<input v-model="editUserData.email" required></label>
+                    <label>Пароль:<input v-model="editUserData.password" type="password" placeholder="Оставьте пустым для без изменений"></label>
+                    <div class="modal-actions">
+                        <button type="button" @click="showEditUser=false">Отмена</button>
+                        <button type="submit">Сохранить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div v-if="showEditIncident" class="modal-overlay">
+            <div class="modal">
+                <h3>Редактировать инцидент</h3>
+                <form @submit.prevent="saveIncident">
+                    <label>Тип:<input v-model="editIncidentData.type" required></label>
+                    <label>Описание:<input v-model="editIncidentData.description" required></label>
+                    <div class="modal-actions">
+                        <button type="button" @click="showEditIncident=false">Отмена</button>
+                        <button type="submit">Сохранить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

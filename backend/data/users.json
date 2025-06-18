@@ -3,13 +3,13 @@
     {
       "id": 1,
       "login": "111",
-      "email": "dssdf@gmail.com",
-      "password": "$2b$10$EelvLY0/M9QKIWMqWTK1geSBPRQGp43.m5WmkPu.GoLUw/TDRfU/u"
+      "email": "dsвывsdf@gmail.com",
+      "password": "$2b$10$J6N8CEdJJQ1P.1PTXdzXZejK2Vd528xnGz7ob1wJ/UM3K13OrV1Te"
     },
     {
       "id": 2,
       "login": "1111",
-      "email": "fdfsdfd@ffdgfd.com",
+      "email": "fdfsdfddfsdfsdfs@ffdgfd.com",
       "password": "$2b$10$YDgPjlMYzjTgT5ORVmBOFeRsb4W3Yyb0R2gdLW2PBE4dpeUUDcHKy"
     },
     {
@@ -65,6 +65,12 @@
       "login": "asddsfsde223",
       "email": "32svcsddf@dfsfgs.com",
       "password": "$2b$10$2qDkVJnShT8AQXZMplLvbOjrKuOMME/3kGWYwndnXoiwVculqt8sa"
+    },
+    {
+      "id": 12,
+      "login": "admin",
+      "email": "admin@gmail.com",
+      "password": "$2b$10$ooA8XZZgHxUkiyARZAnK8OScPX0.amvmIWzJ72cX7Cd9DGuxiS7lm"
     }
   ]
 }

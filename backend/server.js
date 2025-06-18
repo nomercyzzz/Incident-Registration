@@ -19,6 +19,7 @@ const JWT_EXPIRES = process.env.JWT_EXPIRES || '24h';
 // Логика вынесена в отдельные файлы
 const accountLogic = require('./logic/account');
 const incidentsLogic = require('./logic/add-incidents');
+const adminLogic = require('./logic/admin');
 
 // Middleware для проверки JWT
 function authMiddleware(req, res, next) {
@@ -31,6 +32,13 @@ function authMiddleware(req, res, next) {
   } catch {
     res.status(401).json({ message: 'Неверный токен' });
   }
+}
+
+function adminOnly(req, res, next) {
+  if (!req.user || req.user.login !== 'admin') {
+    return res.status(403).json({ message: 'Доступ только для администратора' });
+  }
+  next();
 }
 
 // Регистрация пользователя
@@ -66,6 +74,29 @@ app.use('/script', express.static(path.join(__dirname, '../frontend/src/script')
 // Добавить инцидент (только для авторизованных)
 app.post('/api/incidents', authMiddleware, (req, res) => {
   incidentsLogic.add(req, res, INCIDENTS_FILE);
+});
+
+// --- Admin API ---
+app.get('/api/users', authMiddleware, (req, res) => {
+  adminLogic.getUsers(req, res, USERS_FILE);
+});
+app.delete('/api/users/:id', authMiddleware, (req, res) => {
+  adminLogic.deleteUser(req, res, USERS_FILE);
+});
+app.put('/api/users/:id', authMiddleware, (req, res) => {
+  adminLogic.updateUser(req, res, USERS_FILE);
+});
+app.delete('/api/incidents/:regNumber', authMiddleware, (req, res) => {
+  adminLogic.deleteIncident(req, res, INCIDENTS_FILE);
+});
+app.put('/api/incidents/:regNumber', authMiddleware, (req, res) => {
+  adminLogic.updateIncident(req, res, INCIDENTS_FILE);
+});
+app.post('/api/users', authMiddleware, (req, res) => {
+  adminLogic.createUser(req, res, USERS_FILE);
+});
+app.post('/api/incidents', authMiddleware, (req, res) => {
+  adminLogic.createIncident(req, res, INCIDENTS_FILE);
 });
 
 // Отдаём index.html для всех неизвестных маршрутов

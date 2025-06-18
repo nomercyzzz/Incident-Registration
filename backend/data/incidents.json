@@ -245,21 +245,38 @@
       "regNumber": "INC-015"
     },
     {
-      "type": "Порча имущества",
-      "date": "2025-06-05",
-      "location": "xxx",
-      "status": "В обработке",
-      "description": "xxx",
-      "involvedPersons": [],
-      "regNumber": "INC-016"
-    },
-    {
       "type": "ДТП",
       "date": "1321-02-12",
       "location": "13dsafsd",
       "status": "Удовлетворено",
       "description": "sdfsdfds",
       "involvedPersons": [],
+      "regNumber": "INC-017"
+    },
+    {
+      "type": "Пожар",
+      "date": "2025-06-05",
+      "location": "ччч",
+      "status": "Удовлетворено",
+      "description": "ччч",
+      "involvedPersons": [
+        {
+          "fullName": "адрей адреевич",
+          "role": "Виновник",
+          "address": "проспект мира 16",
+          "criminalRecord": 0,
+          "details": "лет 30",
+          "regNumber": "P-161"
+        },
+        {
+          "fullName": "матвей матвеевич",
+          "role": "Виновник",
+          "address": "ленина 16",
+          "criminalRecord": 2,
+          "details": "плохой",
+          "regNumber": "P-162"
+        }
+      ],
       "regNumber": "INC-017"
     }
   ]

@@ -24,13 +24,22 @@ createApp({
                 message,
                 btnText
             };
-            // Для успешного входа/регистрации
             if (type === 'success') {
+                // Проверяем токен и логин
+                const token = localStorage.getItem('token');
+                let redirectUrl = 'index.html';
+                if (token) {
+                    try {
+                        const payload = JSON.parse(atob(token.split('.')[1]));
+                        if (payload.login === 'admin') {
+                            redirectUrl = 'admin-panel.html';
+                        }
+                    } catch {}
+                }
                 setTimeout(() => {
-                    window.location.href = 'index.html';
-                }, 5000);
+                    window.location.href = redirectUrl;
+                }, 1200);
             } else {
-                // Для ошибок - 3 секунды
                 setTimeout(() => {
                     if (this.alert.show) {
                         this.alert.show = false;
@@ -50,7 +59,8 @@ createApp({
 
             const data = await res.json();
             if (res.ok) {
-                localStorage.setItem('token', data.token);                this.showAlert('success', 'Успешно!', 'Вход выполнен успешно');
+                localStorage.setItem('token', data.token);
+                this.showAlert('success', 'Успешно!', 'Вход выполнен успешно');
             } else {
                 this.showAlert('error', 'Ошибка!', data.message || 'Ошибка входа');
             }
