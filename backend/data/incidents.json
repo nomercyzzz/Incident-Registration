@@ -249,7 +249,7 @@
       "date": "1321-02-12",
       "location": "13dsafsd",
       "status": "Удовлетворено",
-      "description": "sdfsdfds",
+      "description": "111",
       "involvedPersons": [],
       "regNumber": "INC-017"
     },
@@ -278,6 +278,46 @@
         }
       ],
       "regNumber": "INC-017"
+    },
+    {
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImxvZ2luIjoidGVzdHVzZXIxMTExIiwiaWF0IjoxNzUwMjMwNDEzLCJleHAiOjE3NTAzMTY4MTN9.sHklHawKZl2Ftk6iOKx19Sk_hwkKopTgvwffF0AV4QY",
+      "regNumber": "INC-018"
+    },
+    {
+      "type": "Кража",
+      "date": "2025-06-15",
+      "location": "г. Казань, ул. Баумана",
+      "status": "В обработке",
+      "description": "Пропажа оборудования",
+      "involvedPersons": [
+        {
+          "fullName": "Иванов И.И.",
+          "role": "Подозреваемый",
+          "address": "г. Казань, ул. Пушкина, д. 5",
+          "criminalRecord": 1,
+          "details": "Ранее судим",
+          "regNumber": "P-181"
+        }
+      ],
+      "regNumber": "INC-019"
+    },
+    {
+      "type": "Кража",
+      "date": "2025-06-15",
+      "location": "г. Казань, ул. Баумана",
+      "status": "В обработке",
+      "description": "Пропажа оборудования",
+      "involvedPersons": [
+        {
+          "fullName": "Иванов И.И.",
+          "role": "Подозреваемый",
+          "address": "г. Казань, ул. Пушкина, д. 5",
+          "criminalRecord": 1,
+          "details": "Ранее судим",
+          "regNumber": "P-191"
+        }
+      ],
+      "regNumber": "INC-020"
     }
   ]
 }

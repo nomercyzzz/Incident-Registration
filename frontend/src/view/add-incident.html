@@ -108,12 +108,12 @@
                         </div>
                     </div>
                 </div>
-            </div>            <div class="form-actions">
+            </div>            
+            <div class="form-actions">
                 <button type="button" class="cancel-btn" @click="goBack">Отмена</button>
                 <button type="submit" class="submit-btn">Сохранить</button>
             </div>
         </form>
-
         <!-- Алерт с продвинутой анимацией -->
         <transition name="alert">
             <div v-if="alert.show" class="alert-wrapper" @click.self="alert.show = false">

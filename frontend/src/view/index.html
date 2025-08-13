@@ -28,7 +28,8 @@
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                             <path d="M12 2a3 3 0 100 6 3 3 0 000-6zM8 8a4 4 0 118 0 4 4 0 01-8 0zm-2 9a2 2 0 012-2h8a2 2 0 012 2v1H6v-1z"/>
                         </svg>
-                    </button>                    <div v-if="showUserMenu" class="user-dropdown">
+                    </button>
+                    <div v-if="showUserMenu" class="user-dropdown">
                         <div class="user-info">{{ userLogin }}</div>
                         <a href="account.html" class="dropdown-item">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -131,7 +132,8 @@
                         <th>Действия</th>
                     </tr>
                 </thead>
-                <tbody>                    <tr v-for="incident in incidents" :key="incident.regNumber">
+                <tbody>
+                    <tr v-for="incident in incidents" :key="incident.regNumber">
                         <td>{{ incident.regNumber }}</td>
                         <td>{{ formatDate(incident.date) }}</td>
                         <td>{{ incident.type }}</td>

@@ -15,6 +15,9 @@ createApp({
         const incidentSearch = ref('');
         const newIncident = ref({ type: '', description: '' });
         const userLoadError = ref('');
+        const personRegNumber = ref("");
+        const personIncidentCount = ref(null);
+        const personIncidentError = ref("");
 
         const filteredUsers = Vue.computed(() => {
             if (!userSearch.value) return users.value;
@@ -162,6 +165,19 @@ createApp({
             localStorage.removeItem('token');
             window.location.href = 'index.html';
         }
+        async function fetchPersonIncidentCount() {
+            personIncidentError.value = "";
+            personIncidentCount.value = null;
+            if (!personRegNumber.value) return;
+            try {
+                const res = await fetch(`/api/person-incidents-count/${personRegNumber.value}`);
+                if (!res.ok) throw new Error("Ошибка запроса");
+                const data = await res.json();
+                personIncidentCount.value = data.count;
+            } catch (e) {
+                personIncidentError.value = "Ошибка поиска или сервер недоступен";
+            }
+        }
         onMounted(() => {
             fetchUsers();
             fetchIncidents();
@@ -170,7 +186,7 @@ createApp({
             users, incidents, showAddIncident, showAddUser, editUser, deleteUser, editIncident, deleteIncident,
             showEditUser, editUserData, saveUser, showEditIncident, editIncidentData, saveIncident,
             newUser, addUser, newIncident, addIncident, userSearch, incidentSearch, filteredUsers, filteredIncidents,
-            userLoadError, logout
+            userLoadError, logout, personRegNumber, personIncidentCount, personIncidentError, fetchPersonIncidentCount
         };
     }
 }).mount('#app');

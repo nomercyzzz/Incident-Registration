@@ -30,8 +30,8 @@
                         <td>{{ user.login }}</td>
                         <td>{{ user.email }}</td>
                         <td>
-                            <button @click="editUser(user)">Редактировать</button>
-                            <button @click="deleteUser(user.id)">Удалить</button>
+                        <button @click="editUser(user)">Редактировать</button>
+                        <button @click="deleteUser(user.id)">Удалить</button>
                         </td>
                     </tr>
                 </tbody>
@@ -62,6 +62,19 @@
                     </tr>
                 </tbody>
             </table>
+        </section>
+        <section>
+            <h2>Поиск по причастному лицу</h2>
+            <div class="admin-panel-actions" style="gap: 12px; align-items: flex-end;">
+                <input v-model="personRegNumber" placeholder="Например: P-001, P-015..." class="search-input" style="max-width:220px; font-size:1.08em; padding:10px 14px; border-radius:8px; border:1.5px solid #2563eb;">
+                <button @click="fetchPersonIncidentCount" style="background:#2563eb; color:#fff; font-weight:600; border-radius:8px; padding:10px 22px; font-size:1.08em; box-shadow:0 2px 8px rgba(37,99,235,0.08); transition:background 0.2s;">Найти</button>
+            </div>
+            <div v-if="personIncidentCount !== null" style="margin:14px 0 0 0; font-size:1.13em; color:#059669; font-weight:500;">
+                Найдено происшествий: <b>{{ personIncidentCount }}</b>
+            </div>
+            <div v-if="personIncidentError" style="color:#ef4444; margin:12px 0 0 0; font-size:1.08em; font-weight:500;">
+                {{ personIncidentError }}
+            </div>
         </section>
         <!-- Модальные окна для добавления -->
         <div v-if="showAddUser" class="modal-overlay">
@@ -111,10 +124,10 @@
                 <form @submit.prevent="saveIncident">
                     <label>Тип:<input v-model="editIncidentData.type" required></label>
                     <label>Описание:<input v-model="editIncidentData.description" required></label>
-                    <div class="modal-actions">
-                        <button type="button" @click="showEditIncident=false">Отмена</button>
-                        <button type="submit">Сохранить</button>
-                    </div>
+                        <div class="modal-actions">
+                    <button type="button" @click="showEditIncident=false">Отмена</button>
+                    <button type="submit">Сохранить</button>
+                        </div>
                 </form>
             </div>
         </div>

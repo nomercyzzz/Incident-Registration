@@ -1,5 +1,6 @@
 const fs = require('fs');
 const bcrypt = require('bcryptjs');
+const db = require('./db');
 
 function readUsers(USERS_FILE) {
   try {
@@ -24,9 +25,14 @@ function saveIncidents(INCIDENTS_FILE, incidents) {
   fs.writeFileSync(INCIDENTS_FILE, JSON.stringify({ incidents }, null, 2));
 }
 
-exports.getUsers = (req, res, USERS_FILE) => {
-  const users = readUsers(USERS_FILE);
-  res.json({ users });
+exports.getUsers = async (req, res) => {
+  try {
+    const [users] = await db.query('SELECT id, username AS login, email, role FROM users');
+    res.json({ users });
+  } catch (err) {
+    console.error('Ошибка при получении пользователей:', err);
+    res.status(500).json({ message: 'Ошибка сервера', error: err.message });
+  }
 };
 exports.deleteUser = (req, res, USERS_FILE) => {
   const { id } = req.params;

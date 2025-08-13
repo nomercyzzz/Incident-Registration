@@ -4,6 +4,7 @@ const path = require('path');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const cors = require('cors');
+require('dotenv').config();
 
 const app = express();
 app.use(cors());
@@ -43,12 +44,12 @@ function adminOnly(req, res, next) {
 
 // Регистрация пользователя
 app.post('/api/register', (req, res) => {
-  accountLogic.register(req, res, USERS_FILE, JWT_SECRET, JWT_EXPIRES);
+  accountLogic.register(req, res, JWT_SECRET, JWT_EXPIRES);
 });
 
 // Вход пользователя
 app.post('/api/login', (req, res) => {
-  accountLogic.login(req, res, USERS_FILE, JWT_SECRET, JWT_EXPIRES);
+  accountLogic.login(req, res, JWT_SECRET, JWT_EXPIRES);
 });
 
 // Получить формы (типы, роли, статусы)
@@ -76,7 +77,24 @@ app.post('/api/incidents', authMiddleware, (req, res) => {
   incidentsLogic.add(req, res, INCIDENTS_FILE);
 });
 
-// --- Admin API ---
+// Получить количество происшествий по regNumber причастного лица
+app.get('/api/person-incidents-count/:personRegNumber', (req, res) => {
+  const personRegNumber = req.params.personRegNumber;
+  const db = require('./logic/db');
+  db.query(
+    "SELECT COUNT(*) as count FROM incidents WHERE JSON_CONTAINS(involvedPersons, JSON_OBJECT('regNumber', ?))",
+    [personRegNumber]
+  )
+    .then(([rows]) => {
+      res.json({ count: rows[0].count });
+    })
+    .catch(err => {
+      console.error('Ошибка при поиске по regNumber:', err);
+      res.status(500).json({ message: 'Ошибка сервера', error: err.message });
+    });
+});
+
+// админ апи
 app.get('/api/users', authMiddleware, (req, res) => {
   adminLogic.getUsers(req, res, USERS_FILE);
 });

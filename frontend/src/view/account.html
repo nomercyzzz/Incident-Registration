@@ -24,43 +24,22 @@
                     </div>
                 </div>
                 <div class="tab-switcher">
-                    <button 
-                        @click="activeTab = 'login'"
-                        :class="['tab-btn', activeTab === 'login' ? 'active' : '']"
-                    >
+                    <button @click="activeTab = 'login'" :class="['tab-btn', activeTab === 'login' ? 'active' : '']">
                         Вход
                     </button>
-                    <button 
-                        @click="activeTab = 'register'"
-                        :class="['tab-btn', activeTab === 'register' ? 'active' : '']"
-                    >
+                    <button @click="activeTab = 'register'" :class="['tab-btn', activeTab === 'register' ? 'active' : '']">
                         Регистрация
                     </button>
                 </div>
                 <div :class="['form-wrapper', activeTab === 'login' ? 'active' : '']">
                     <form @submit.prevent class="auth-form">
                         <div class="form-field">
-                            <input 
-                                type="text"
-                                v-model="loginForm.username"
-                                placeholder="Логин"
-                                required
-                            >
-                        </div>
-                        
+                            <input type="text" v-model="loginForm.username" placeholder="Логин" required>
+                        </div>  
                         <div class="form-field">
-                            <input 
-                                type="password"
-                                v-model="loginForm.password"
-                                placeholder="Пароль"
-                                required
-                            >
+                            <input type="password" v-model="loginForm.password" placeholder="Пароль" required>
                         </div>
-                        
-                        <button 
-                            type="submit"
-                            class="submit-btn"
-                        >
+                        <button type="submit" class="submit-btn">
                             <span>Войти</span>
                         </button>
                     </form>
@@ -68,40 +47,20 @@
                 <div :class="['form-wrapper', activeTab === 'register' ? 'active' : '']">
                     <form @submit.prevent class="auth-form">
                         <div class="form-field">
-                            <input 
-                                type="text"
-                                v-model="registerForm.username"
-                                placeholder="Логин"
-                                required
-                            >
+                            <input type="text" v-model="registerForm.username" placeholder="Логин" required>
                         </div>
-
                         <div class="form-field">
-                            <input 
-                                type="email"
-                                v-model="registerForm.email"
-                                placeholder="Email"
-                                required
-                            >
+                            <input type="email" v-model="registerForm.email" placeholder="Email" required>
                         </div>
-                        
                         <div class="form-field">
-                            <input 
-                                type="password"
-                                v-model="registerForm.password"
-                                placeholder="Пароль"
-                                required
-                            >
+                            <input type="password" v-model="registerForm.password" placeholder="Пароль" required>
                         </div>
-                        
-                        <button 
-                            type="submit"
-                            class="submit-btn"
-                        >
+                        <button type="submit" class="submit-btn">
                             <span>Создать аккаунт</span>
                         </button>
                     </form>
-                </div>                <transition name="alert">
+                </div>                
+                <transition name="alert">
                     <div v-if="alert.show" class="alert-wrapper" @click.self="alert.show = false">
                         <div class="alert-container" :class="alert.type">
                             <div class="alert-icon">
